@@ -1,0 +1,40 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h2>Admin Dashboard</h2>
+            </div>
+            <div class="card-body">
+                <h4>Welcome, {{ user.username }}</h4>
+                <p>This is your admin dashboard. You can manage lost items and requests here.</p>
+                
+                <div class="row mt-4">
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Lost Items Management</h5>
+                                <p class="card-text">Manage all lost items in the system.</p>
+                                <a href="{% url 'admin_items_list' %}" class="btn btn-primary">Manage Items</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Add New Item</h5>
+                                <p class="card-text">Add a new lost item to the system.</p>
+                                <a href="{% url 'item_create' %}" class="btn btn-success">Add Item</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

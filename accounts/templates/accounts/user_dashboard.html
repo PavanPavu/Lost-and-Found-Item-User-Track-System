@@ -1,0 +1,40 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}User Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h2>Welcome, {{ user.username }}</h2>
+            </div>
+            <div class="card-body">
+                <h4>User Dashboard</h4>
+                <p>This is your user dashboard. You can view lost items and manage your requests here.</p>
+                
+                <div class="row mt-4">
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Browse Lost Items</h5>
+                                <p class="card-text">View all lost items and make requests for items that belong to you.</p>
+                                <a href="{% url 'user_items_list' %}" class="btn btn-primary">Browse Items</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">My Requests</h5>
+                                <p class="card-text">View and manage your item requests.</p>
+                                <a href="{% url 'user_requests_list' %}" class="btn btn-info">View My Requests</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

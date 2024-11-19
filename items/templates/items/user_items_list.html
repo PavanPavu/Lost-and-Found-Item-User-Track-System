@@ -1,0 +1,55 @@
+{% extends 'accounts/base.html' %}
+{% load item_filters %}
+
+{% block title %}Lost Items{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-6">
+        <h2>Lost Items</h2>
+    </div>
+    <div class="col-md-6">
+        <form method="get" class="form-inline">
+            <div class="input-group">
+                {{ form.status }}
+                <button type="submit" class="btn btn-secondary">Filter</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    {% for item in items %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p class="card-text">{{ item.description|truncatewords:30 }}</p>
+                    <p class="card-text">
+                        <small class="text-muted">Status: {{ item.get_status_display }}</small>
+                        {% if item.status == 'returned' %}
+                            <br>
+                            <small class="text-muted">Returned to: {{ item.returned_to.username }}</small>
+                        {% endif %}
+                    </p>
+                    {% if item.status == 'lost' %}
+                        {% if item.pk in user_requests %}
+                            <p class="text-info">Request Status: {{ user_requests|get_item:item.pk }}</p>
+                        {% else %}
+                            <a href="{% url 'item_request_create' item.pk %}" class="btn btn-primary">Request Item</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Found on: {{ item.date_found|date }}</small>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">No items found.</div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
