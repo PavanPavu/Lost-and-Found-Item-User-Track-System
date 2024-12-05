@@ -7,9 +7,16 @@ pipeline {
                 git branch: 'main', credentialsId: 'github_creds', url: 'https://github.com/PavanPavu/devops'
             }
         }
-        stage('2.pwd') {
+        stage('2. copy') {
             steps {
-                sh 'pwd'
+            sh '''sudo cp -r /home/ubuntu/jenkins/workspace/Devops/* /home/ubuntu/devops/'''
+            }
+        }
+        stage('3.restart') {
+            steps {
+            sh '''sudo systemctl daemon-reload
+            sudo systemctl restart gunicorn
+            sudo systemctl restart nginx'''
             }
         }
     }
