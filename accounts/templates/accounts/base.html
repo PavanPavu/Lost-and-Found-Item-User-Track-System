@@ -16,11 +16,9 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     {% if user.is_authenticated %}
+                        
                         <li class="nav-item">
-                            <span class="nav-link">Role: {{ user.role|title }}</span>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% if user.role == 'admin' %}{% url 'admin_dashboard' %}{% else %}{% url 'user_dashboard' %}{% endif %}">Dashboard</a>
+                            <a class="nav-link" href="{% if user.is_superuser%}{% url 'admin_dashboard' %}{% else %}{% url 'user_dashboard' %}{% endif %}">Dashboard</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'logout' %}">Logout</a>

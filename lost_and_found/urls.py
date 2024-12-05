@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 
 def home(request):
     if request.user.is_authenticated:
-        if request.user.role == 'admin':
+        if request.user.is_superuser:
             return redirect('admin_dashboard')
         return redirect('user_dashboard')
     return redirect('login')

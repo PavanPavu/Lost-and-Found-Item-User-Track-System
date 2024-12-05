@@ -12,7 +12,7 @@ class CustomLoginView(LoginView):
     template_name = 'accounts/login.html'
     
     def get_success_url(self):
-        if self.request.user.role == 'admin':
+        if self.request.user.is_superuser:
             return reverse_lazy('admin_dashboard')
         return reverse_lazy('user_dashboard')
 
@@ -23,7 +23,7 @@ def register(request):
             user = form.save()
             login(request, user)
             messages.success(request, 'Registration successful!')
-            if user.role == 'admin':
+            if user.is_superuser:
                 return redirect('admin_dashboard')
             return redirect('user_dashboard')
     else:
@@ -37,11 +37,11 @@ def logout_view(request):
 
 @login_required
 def user_dashboard(request):
-    if request.user.role == 'admin':
+    if request.user.is_superuser:
         return redirect('admin_dashboard')
     return render(request, 'accounts/user_dashboard.html')
 
 @login_required
-@user_passes_test(lambda u: u.role == 'admin')
 def admin_dashboard(request):
-    return render(request, 'accounts/admin_dashboard.html')
+    if(request.user.is_superuser):
+        return render(request, 'accounts/admin_dashboard.html')

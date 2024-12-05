@@ -8,7 +8,9 @@ from django.db import transaction
 from django.urls import reverse
 
 def is_admin(user):
-    return user.role == 'admin'
+    print("items")
+    print(user.is_superuser)
+    return user.is_superuser
 
 # Admin Views
 @login_required
