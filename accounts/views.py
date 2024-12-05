@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,HttpResponse
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -43,5 +43,7 @@ def user_dashboard(request):
 
 @login_required
 def admin_dashboard(request):
-    if(request.user.is_superuser):
+    if request.user.is_superuser:
         return render(request, 'accounts/admin_dashboard.html')
+    else:
+        return HttpResponse("Error!")
