@@ -7,5 +7,10 @@ pipeline {
                 git branch: 'main', credentialsId: 'github_creds', url: 'https://github.com/PavanPavu/devops'
             }
         }
+        stage('2.pwd') {
+            steps {
+                sh 'pwd'
+            }
+        }
     }
 }
