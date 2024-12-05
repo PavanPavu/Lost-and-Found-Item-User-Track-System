@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('1.git checkout') {
             steps {
-                echo 'Hello World'
+                git branch: 'main', credentialsId: 'github_creds', url: 'https://github.com/PavanPavu/devops'
             }
         }
     }
