@@ -15,3 +15,8 @@ urlpatterns = [
     path('items/<int:pk>/request/', views.item_request_create, name='item_request_create'),
     path('my-requests/', views.user_requests_list, name='user_requests_list'),
 ]
+
+from django.conf.urls.static import static
+from django.conf import settings
+
+urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
