@@ -4,7 +4,6 @@ from .models import Item, ItemRequest
 class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        # fields = ['title', 'description']
         fields = ['title', 'description', 'image']
         widgets = {
             'description': forms.Textarea(attrs={'rows': 4}),
