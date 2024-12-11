@@ -9,7 +9,7 @@ pipeline {
         }
         stage('2. copy') {
             steps {
-            sh '''sudo cp -r /home/ubuntu/jenkins/workspace/Devops/* /home/ubuntu/devops/'''
+            sh '''sudo cp -r /jenkins/workspace/Devops/* /home/ubuntu/devops/'''
             }
         }
         stage('3.restart') {
