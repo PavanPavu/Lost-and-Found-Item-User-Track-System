@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('1.git checkout') {
             steps {
-                git branch: 'main', credentialsId: 'github_creds', url: 'https://github.com/PavanPavu/devops'
+                git branch: 'main', credentialsId: 'githubcreds', url: 'https://github.com/PavanPavu/devops'
             }
         }
         stage('2. copy') {
